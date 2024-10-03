@@ -65,8 +65,6 @@ export class CustomDate {
             event.eventText = theEvent
             event.id = this.events.length // if length = 0 then id = 0, also corresponding index
             this.events.push(event)
-        } else {
-            return 'Try passing event argument as string'
         }
     }
 
