@@ -56,6 +56,10 @@ export class DateManager {
     }
 
 
+    /**
+     * Sorts dates from earliest to latest.
+     *
+     */
     sortDates() {
         try {
             this.#isLongEnoughToSort()

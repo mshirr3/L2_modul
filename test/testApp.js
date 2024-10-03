@@ -9,7 +9,7 @@ dateManager.saveCustomDate(date1)
 const result = dateManager.isDateSaved(date1)
 // console.log(result)
 
-// Testfall 1.2 (SUCCESS)
+// Testfall 1.1 (SUCCESS)
 const date2 = new CustomDate(new Date('2024-05-07'))
 const result2 = dateManager.isDateSaved(date2)
 // console.log(result2)

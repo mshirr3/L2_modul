@@ -24,6 +24,11 @@ export class CustomDate {
         }
     }
 
+    /**
+     * Formats the date as year-month-day
+     *
+     * @returns {string} the formatted date
+     */
     getFormattedDate() {
         const year = this.date.getFullYear()
         const month = this.formatMonth(this.date.getMonth())
