@@ -11,4 +11,4 @@ import { CustomDate } from 'date-managing'
 
 import { DateManager } from 'date-managing'
 
-To get an idea of how to use this module, check out the testApp under the Test catalogue.
+To get an idea of how to use this module, check out the testApp under the test catalogue.
