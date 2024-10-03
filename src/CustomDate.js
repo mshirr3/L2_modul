@@ -45,7 +45,6 @@ export class CustomDate {
         } else {
             month = correctMonthNumber.toString()
         }
-
         return month
     }
 
@@ -59,12 +58,12 @@ export class CustomDate {
         this.date = newDate
     }
 
-    setEvent(theEvent) {
-        if (typeof theEvent === 'string') {
-            const event = {}
-            event.eventText = theEvent
-            event.id = this.events.length // if length = 0 then id = 0, also corresponding index
-            this.events.push(event)
+    setEvent(event) {
+        if (typeof event === 'string') {
+            const theEvent = {}
+            theEvent.eventText = theEvent
+            theEvent.id = this.events.length // if length = 0 then id = 0, also corresponding index
+            this.events.push(theEvent)
         }
     }
 
@@ -110,7 +109,6 @@ export class CustomDate {
         } catch (error) {
             return error.message
         }
-
     }
 
     isPast() {
@@ -129,6 +127,5 @@ export class CustomDate {
         } catch (error) {
             return error.message
         }
-
     }
 }
