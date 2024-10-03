@@ -4,28 +4,23 @@
  */
 
 export class CustomDate {
+
     constructor(date = new Date()) {
-        this.isDate(date)
+        this.#isDate(date)
         this.date = date
+        this.events = []
     }
 
-    isDate(date) {
-        try {
-            if (!(date instanceof Date)) {
-                throw new Error('Input must be a date object')
-            }
-        } catch (error) {
-            return error.message
+    #isDate(date) {
+        if (!(date instanceof Date)) {
+            throw new Error('Input must be a date object (not CustomDate)')
         }
+
     }
 
     isCustomDate(customDate) {
-        try {
-            if (!(customDate instanceof CustomDate)) {
-                throw new Error('Must be instance of custom date class')
-            }
-        } catch (error) {
-            return error.message
+        if (!(customDate instanceof CustomDate)) {
+            throw new Error('Must be instance of custom date class')
         }
     }
 
@@ -55,37 +50,64 @@ export class CustomDate {
     }
 
     setNewDate(newDate) {
-        this.isDate(newDate)
+        this.#isDate(newDate)
         this.date = newDate
     }
 
-    addEventAsString(event) {
-        if (typeof event === 'string') {
-            this.event = event
-        }
-    }
-
-    deleteEvent () {
-        this.isCustomDate()
-        delete this.event
-    }
-
-    getEventForCustomDate(CustomDate) {
-        this.isCustomDate(CustomDate)
-
-        if (CustomDate.event) {
-            return CustomDate.event
+    setEvent(theEvent) {
+        if (typeof theEvent === 'string') {
+            const event = {}
+            event.eventText = theEvent
+            event.id = this.events.length // if length = 0 then id = 0, also corresponding index
+            this.events.push(event)
         } else {
-            return 'No event at this date'
+            return 'Try passing event argument as string'
         }
     }
 
-    differenceInDays (anotherDate) {
-        this.isDate()
-        const currentDate = this.date.getDate()
-        const otherDate = anotherDate.getDate()
-        const diffTime = Math.abs(otherDate - currentDate)
-        return Math.ceil(diffTime / 1000 * 60 *60 * 24) + ' days'
+    getEvent(id) {
+        const event = this.events[id]
+        return event
+    }
+
+    getEvents() {
+        if (this.events.length > 0) {
+            let eventStrings = []
+            for (let i = 0; i < this.events.length; i++) {
+                eventStrings.push(` Event: ${this.events[i].eventText}, eventId: ${this.events[i].id}`)
+            }
+            return eventStrings
+        }
+    }
+
+    deleteEvent(id) {
+        // the id corresponds to index of event
+        const index = id
+        this.events.splice(index, 1)
+    }
+
+    updateEvent(id, updatedEvent) {
+        const currentEvent = this.getEvent(id)
+        currentEvent.eventText = updatedEvent
+    }
+
+    /**
+     * 
+     * @param {Date} anotherDate - a date object to compare two dates
+     * @returns {string} difference in days
+     */
+    differenceInDays(anotherDate) {
+        try {
+            this.#isDate(anotherDate)
+            const currentDateTime = this.date.getTime()
+            const otherDateTime = anotherDate.getTime()
+            const diffTime = Math.abs(otherDateTime - currentDateTime)
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+            return `${diffDays} days`
+        } catch (error) {
+            return error.message
+        }
+
     }
 
     isPast() {
@@ -93,6 +115,17 @@ export class CustomDate {
         return this.date.getTime() < dateOfToday.getTime()
     }
 
-    checkEa
+    getLatestDateOfTwo(date2) {
+        try {
+            this.#isDate(date2)
+            if (this.date.getTime() < date2.getTime()) {
+                return date2
+            } else {
+                return this.date
+            }
+        } catch (error) {
+            return error.message
+        }
 
+    }
 }
