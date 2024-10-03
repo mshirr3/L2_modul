@@ -32,21 +32,20 @@ export class DateManager {
         return false
     }
 
-    getAllCustomDatesWithEvents() {
-        try {
-            let datesWithEventsStrings = []
-            for (let i = 0; i < this.dates.length; i++) {
+    getFormattedDatesWithEvents() {
+        let datesWithEvents = []
+        for (let i = 0; i < this.dates.length; i++) {
+            try {
                 if (this.dates[i].events.length >= 1) {
                     let events = this.dates[i].getEvents()
                     let date = this.dates[i].getFormattedDate()
-                    datesWithEventsStrings.push(` ${date}, ${events}`)
+                    datesWithEvents.push(` ${date}, ${events}`)
                 }
-
+            } catch (error) {
+                return error.message
             }
-            return datesWithEventsStrings
-        } catch (error) {
-            return error.message
         }
+        return datesWithEvents
     }
 
     #isLongEnoughToSort() {
@@ -54,7 +53,6 @@ export class DateManager {
             throw new Error('Not enough dates to sort')
         } else return true
     }
-
 
     /**
      * Sorts dates from earliest to latest.
