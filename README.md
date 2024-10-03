@@ -8,6 +8,7 @@ To acquire this module, simply type npm i date-managing in the root of your proj
 Assuming you're using es module, import like this:
 
 import { CustomDate } from 'date-managing'
+
 import { DateManager } from 'date-managing'
 
 To get an idea of how to use this module, check out the testApp under the Test catalogue.
