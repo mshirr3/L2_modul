@@ -1,5 +1,5 @@
 /**
- * Class that represents a date.
+ * Class that represents dates with events.
  *
  */
 

@@ -1,27 +1,11 @@
-# L2_modul
-Modul för Laboration 2 i 1dv610.
+# Date-management
+Module for Laboration 2 in 1dv610 at the linneaus university Kalmar, Sweden.
 
-  // Command: Sort all stored dates
-  sortDates() {
-    if (this.dates.length <= 1) {
-      console.log('Not enough dates to sort.');
-      return;
-    }
+This a module that can be used for managin dates and events. It includes two classes with several functions to be called upon. 
 
-    // Simple bubble sort with control flow statements
-    let swapped;
-    do {
-      swapped = false;
-      for (let i = 0; i < this.dates.length - 1; i++) {
-        if (this.dates[i].getDate() > this.dates[i + 1].getDate()) {
-          // Swap dates
-          let temp = this.dates[i];
-          this.dates[i] = this.dates[i + 1];
-          this.dates[i + 1] = temp;
-          swapped = true;
-        }
-      }
-    } while (swapped);
-    console.log('Dates have been sorted.');
-  }
+To acquire this module, simply type npm i date-managing in the root of your project.
+Assuming you're using es module, import like this:
+import { CustomDate } from 'date-managing'
+import { DateManager } from 'date-managing'
 
+To get an idea of how to use this module, check out the testApp under the Test catalogue.

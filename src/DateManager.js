@@ -1,6 +1,6 @@
 import { CustomDate } from './CustomDate.js'
 /**
- * Class that represents a date.
+ * Class that manages CustomDate objects.
  *
  */
 

@@ -59,7 +59,7 @@ date6.setEvent('Take a shower')
 
 dateManager.saveCustomDate(date6)
 dateManager.saveCustomDate(date5)
-// console.log(dateManager.getFormattedDatesWithEvents())
+//console.log(dateManager.getFormattedDatesWithEvents())
 
 // Testfall 7 (SUCCESS)
 dateManager.saveCustomDate(date3)

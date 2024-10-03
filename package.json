@@ -1,12 +1,11 @@
 {
-  "name": "date-manager",
+  "name": "date-managing",
   "version": "1.0.0",
   "description": "Modul för Laboration 2 i 1dv610.",
-  "main": "src/index.js",
   "type": "module",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
