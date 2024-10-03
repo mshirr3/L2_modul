@@ -16,7 +16,7 @@ export class DateManager {
     }
 
     // not really working
-    checkIfDatesWithEventsSaved() {
+    #checkIfDatesWithEventsSaved() {
         if (!(this.dates.some(customDate => customDate.event !== undefined))) {
             throw new Error('No dates with event found')
         }
