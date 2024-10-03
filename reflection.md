@@ -93,6 +93,9 @@ time could have been described better in the naming since a user may not underst
 </tr>
 </table>
 
+**Short reflection of Chapter 2**
+Studying this chaoter and also reflecting on my written code made me realize many shortcomings in my code but i also learned a great deal from it. I would say two of the biggest shortcomings and challenges of mine are to use meaningful names and also avoiding mental mapping. It's easy to write code that you yourself understand in the moment but when writing code that can be maintained by other in the future an even by yourself, I find it vital to understand and implement especially these two rules and principles.
+
 **The table for analyzing functions according to chapter 3 in Clean Code "functions"**
 
 <table>
@@ -200,3 +203,9 @@ the month variable for example is only used locally since its only relevant to b
 </td>
 </tr>
 </table>
+
+**Short reflection of Chapter 3**
+For this chapter, my two biggest flaws that I found were stickkign to the command-query separation rule and letting the function do one thing. Refactoring regurarly is also something useful that can combat this. To be fair this chapter exposed a lot of shortcoming on my end, many seen in the reflection in the table. I find myself kind of taking a shortcut when it comes to command-query and just doing both in one swoop. I wasn't really used to following this and other rules strictly but I now realize how helpful it is and actually makes the code cleaner.
+
+**Short reflection of my code quality**
+Like mentioned in the reflections of the two chapters, my code quality according to the book is very poor. From not following command-query separation strictly to sometimes not being descriptive enough when naming functions, variables leading to mental mapping. I do have a lot to learn and indeed a lot was learned. I find being mindful of all these rules while coding to be difficult but that's where I think refactoring comes in. Previously I used to think just solving the logic was enough but for a system that is to be maintained, code quality is more than necessary. One challenge I've encountered in this assignment has to do with abstraction levels and keeping them on the same detail. I think it takes a little bit more experience than I have to fully understand but it's a process, rome wasn't built in one day and all that.
