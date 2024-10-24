@@ -1,4 +1,5 @@
 import { CustomDate } from './CustomDate.js'
+import { DateSorter } from './DateSorter.js'
 /**
  * Class that manages CustomDate objects.
  *
@@ -8,11 +9,12 @@ export class DateManager {
     constructor() {
         this.CustomDate = new CustomDate()
         this.dates = []
+        this.datesWithEvents = []
     }
 
-    saveCustomDate(newCustomDate) {
-        this.CustomDate.isCustomDate(newCustomDate)
-        this.dates.push(newCustomDate)
+    saveCustomDate(customDate) {
+        this.CustomDate.isCustomDate(customDate)
+        this.dates.push(customDate)
     }
 
     // not really working
@@ -32,55 +34,30 @@ export class DateManager {
         return false
     }
 
-    getFormattedDatesWithEvents() {
+    saveDatesWithEvents() {
         let datesWithEvents = []
         for (let i = 0; i < this.dates.length; i++) {
-            try {
-                if (this.dates[i].events.length >= 1) {
-                    let events = this.dates[i].getEvents()
-                    let date = this.dates[i].getFormattedDate()
-                    datesWithEvents.push(` ${date}, ${events}`)
-                }
-            } catch (error) {
-                return error.message
+            if (this.dates[i].events.length >= 1) {
+                let events = this.dates[i].getEvents()
+                let date = this.dates[i].getFormattedDate()
+                datesWithEvents.push(` ${date}, ${events}`)
             }
         }
-        return datesWithEvents
+        this.datesWithEvents = datesWithEvents
     }
 
-    #isLongEnoughToSort() {
-        if (this.dates.length <= 1) {
-            throw new Error('Not enough dates to sort')
-        } else return true
+    getDatesWithEvents() {
+        this.saveDatesWithEvents()
+        return this.datesWithEvents
+
     }
 
     /**
      * Sorts dates from earliest to latest.
      *
      */
-    sortDates() {
-        try {
-            this.#isLongEnoughToSort()
-            let swapped
-            do {
-                swapped = false
-                for (let i = 0; i < this.dates.length - 1; i++) {
-                    const customDate1 = this.dates[i]
-                    const customDate2 = this.dates[i + 1]
-                    const dateOfCustomDate1 = customDate1.date.getTime() // Convert to timestamp
-                    const dateOfCustomDate2 = customDate2.date.getTime()  // Convert to timestamp
-                    // If date1 is greater than date2, swap them
-                    if (dateOfCustomDate1 > dateOfCustomDate2) {
-                        let temp = this.dates[i]
-                        this.dates[i] = this.dates[i + 1]
-                        this.dates[i + 1] = temp
-                        swapped = true
-                    }
-                }
-            } while (swapped)
-        } catch (error) {
-            return error.message
-        }
-
+    sortDates () {
+        const dateSorter = new DateSorter(this.dates)
+        dateSorter.sortDates()
     }
 }

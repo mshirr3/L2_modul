@@ -15,7 +15,6 @@ export class CustomDate {
         if (!(date instanceof Date)) {
             throw new Error('Input must be a date object (not CustomDate)')
         }
-
     }
 
     isCustomDate(customDate) {
@@ -53,17 +52,19 @@ export class CustomDate {
         return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
     }
 
-    setNewDate(newDate) {
-        this.#isDate(newDate)
-        this.date = newDate
+    setNewDate(date) {
+        this.#isDate(date)
+        this.date = date
     }
 
     setEvent(event) {
         if (typeof event === 'string') {
             const theEvent = {}
-            theEvent.eventText = theEvent
+            theEvent.eventText = event
             theEvent.id = this.events.length // if length = 0 then id = 0, also corresponding index
             this.events.push(theEvent)
+        } else {
+            throw new Error('Event must be a string')
         }
     }
 
@@ -76,9 +77,11 @@ export class CustomDate {
         if (this.events.length > 0) {
             let eventStrings = []
             for (let i = 0; i < this.events.length; i++) {
-                eventStrings.push(` Event: ${this.events[i].eventText}, eventId: ${this.events[i].id}`)
+                eventStrings.push(` "${this.events[i].eventText}", eventId: ${this.events[i].id}`)
             }
             return eventStrings
+        } else {
+            throw new Error('No events for this date found')
         }
     }
 
