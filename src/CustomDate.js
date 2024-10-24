@@ -15,7 +15,6 @@ export class CustomDate {
         if (!(date instanceof Date)) {
             throw new Error('Input must be a date object (not CustomDate)')
         }
-
     }
 
     isCustomDate(customDate) {
@@ -64,6 +63,8 @@ export class CustomDate {
             theEvent.eventText = event
             theEvent.id = this.events.length // if length = 0 then id = 0, also corresponding index
             this.events.push(theEvent)
+        } else {
+            throw new Error('Event must be a string')
         }
     }
 
@@ -79,6 +80,8 @@ export class CustomDate {
                 eventStrings.push(` "${this.events[i].eventText}", eventId: ${this.events[i].id}`)
             }
             return eventStrings
+        } else {
+            throw new Error('No events for this date found')
         }
     }
 
