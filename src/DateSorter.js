@@ -1,7 +1,8 @@
 
 export class DateSorter {
+    #dates
     constructor (dates) {
-        this.dates = dates
+        this.#dates = dates
     }
 
     sortDates () {
@@ -9,7 +10,7 @@ export class DateSorter {
             this.#isLongEnoughToSort()
             this.#sortDatesCommand()
         } catch (error) {
-            return this.#handleError(error)
+            return error.message
         }
     }
 
@@ -24,8 +25,8 @@ export class DateSorter {
     }
 
     #checkForSwaps () {
-        for (let i = 0; i < this.dates.length - 1; i++) {
-            if (this.#areSwapsNeeded(this.dates[i], this.dates[i + 1])) {
+        for (let i = 0; i < this.#dates.length - 1; i++) {
+            if (this.#areSwapsNeeded(this.#dates[i], this.#dates[i + 1])) {
                 return true
             }
         }
@@ -33,33 +34,29 @@ export class DateSorter {
     }
 
     #doSwaps () {
-        for (let i = 0; i < this.dates.length - 1; i++) {
-            if (this.#areSwapsNeeded(this.dates[i], this.dates[i + 1])) {
+        for (let i = 0; i < this.#dates.length - 1; i++) {
+            if (this.#areSwapsNeeded(this.#dates[i], this.#dates[i + 1])) {
                 this.#swapDates(i)
             }
         }
     }
 
     #areSwapsNeeded (customDate1, customDate2) {
-        const date1 = customDate1.date.getTime()
-        const date2 = customDate2.date.getTime()
+        const date1 = customDate1.getDate().getTime()
+        const date2 = customDate2.getDate().getTime()
         return date1 > date2
     }
 
 
     #swapDates (index) {
-        const temp = this.dates[index]
-        this.dates[index] = this.dates[index + 1]
-        this.dates[index + 1] = temp
+        const temp = this.#dates[index]
+        this.#dates[index] = this.#dates[index + 1]
+        this.#dates[index + 1] = temp
     }
 
     #isLongEnoughToSort () {
-        if (this.dates.length < 2) {
+        if (this.#dates.length < 2) {
             throw new Error ('Not enough dates to sort')
         }
-    }
-
-    #handleError (error) {
-        return error.message
     }
 }

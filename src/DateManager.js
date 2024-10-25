@@ -6,50 +6,46 @@ import { DateSorter } from './DateSorter.js'
  */
 
 export class DateManager {
+    #dates
     constructor() {
-        this.CustomDate = new CustomDate()
-        this.dates = []
-        this.datesWithEvents = []
+        this.#dates = []
     }
 
-    saveCustomDate(customDate) {
-        this.CustomDate.isCustomDate(customDate)
-        this.dates.push(customDate)
+    createCustomDate (date) {
+        if (!(this.isDateSaved(date))) {
+           const customDate = new CustomDate(date)
+           this.#dates.push(customDate)
+        } else {
+            throw new Error('Custom date with this date already exists')
+        }
     }
 
-    // not really working
-    #checkIfDatesWithEventsSaved() {
-        if (!(this.dates.some(customDate => customDate.event !== undefined))) {
-            throw new Error('No dates with event found')
+    getCustomDate(date) {
+        if (this.isDateSaved(date)) {
+            for (const customDate of this.#dates) {
+                const savedDate = customDate.getDate()
+                if (savedDate.getTime() === date.getTime()) {
+                    return customDate
+                }
+            }
+            throw new Error('No custom date for this date')
         }
     }
 
     // Compares the two object by value not reference since reference is not relevant.
-    isDateSaved(customDate) {
-        for (const dateObj of this.dates) {
-            if ((dateObj.date.getTime() === customDate.date.getTime()) && dateObj.event === customDate.event) {
+    isDateSaved(date) {
+        for (const customDate of this.#dates) {
+            const savedDate = customDate.getDate()
+            if (!(customDate.isDate(date)) && savedDate.getTime() === date.getTime()) {
                 return true
             }
         }
         return false
     }
 
-    saveDatesWithEvents() {
-        let datesWithEvents = []
-        for (let i = 0; i < this.dates.length; i++) {
-            if (this.dates[i].events.length >= 1) {
-                let events = this.dates[i].getEvents()
-                let date = this.dates[i].getFormattedDate()
-                datesWithEvents.push(` ${date}, ${events}`)
-            }
-        }
-        this.datesWithEvents = datesWithEvents
-    }
 
-    getDatesWithEvents() {
-        this.saveDatesWithEvents()
-        return this.datesWithEvents
-
+    getAllCustomDates() {
+        return this.#dates
     }
 
     /**
@@ -57,7 +53,8 @@ export class DateManager {
      *
      */
     sortDates () {
-        const dateSorter = new DateSorter(this.dates)
+        const dates = this.getAllCustomDates()
+        const dateSorter = new DateSorter(dates)
         dateSorter.sortDates()
     }
 }

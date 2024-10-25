@@ -10,37 +10,26 @@ Spara ett custom-date-objekt i dates arrayen i Date-manager-objekt.
 
 Input 
 
-    Skapa ett custom-date- och date-managerobjekt 
+    Skapa en instans av date-managerobjekt 
 
-    Spara custom-date genom saveCustomDate-funktionen på date-manager 
+    Skapa customDate med dagens datum genom createCustomDate-func i date-manager 
 
-    Använd isDatesaved för att kolla om sparad 
+    getCustomdate och skicka med datumet som argument 
 
-    Logga ut resultatet 
-
-Output 
-
-    True loggas ut på konsolen 
-
-Testfall 1.1 Osparat custom-date objekt 
-
-    Gör ett nytt custom-date objekt och spara som tidigare 
-
-    Checka ifall sparad med isDatesaved 
-
-    Logga ut 
+    Logga ut customdate objekt 
 
 Output 
 
-    False loggas ut 
+    objektet loggas ut på konsolen 
+
 
 Testfall 2 Lägg till flera events på customDate-objekt 
 
 Input 
 
-    Skapa ett customDateobjekt 
+    Skapa ett customDateobjekt som i testfall 1
 
-    Anropa setEvent funktion för att lägga till events ('new event1’), ('new event3’), ('new event2’) 
+    Anropa createEvent funktion för att lägga till events ('new event1’), ('new event3’), ('new event2’) 
 
     Anropa getEvents och spara resultat i variabel 
 
@@ -70,20 +59,6 @@ Output
 
  
 
-Testfall 2.2 Get event när inga event lagts till 
-
-Input 
-
-    Testfall 2 
-
- 
-
-Output  
-
-    ‘No event found for this date’ returneras 
-
- 
-
 Testfall 3 Checka skillnaden mellan två datum 
 
 Checka skillnaden i dagar mellan två olika datum 
@@ -92,7 +67,7 @@ Input
 
     Skapa två customDate objekt med olika datum (2010-10-05 och 2020-10-01) 
 
-    Anropa differenceindays metoden på ett av objekten och skicka in ett av värdet av ett av date attributen som argument (customDate.date) 
+    Anropa differenceindays metoden på ett av objekten och skicka in ett av värdet av ett av customDates date object som argument 
 
     Spara det returnerade värde i variabel och logga ut 
 
@@ -106,7 +81,7 @@ Testfall 4 Ta reda på det senaste datumet av två
 
 Input 
 
-    Anropa latestDateofTwo på ett customdate objekt och skicka in ett annat som argument (2010-10-05 och 2020-10-01)  
+    Anropa latestDateofTwo på ett customdate objekt och skicka in den anra customDates date object som argument (2010-10-05 och 2020-10-01)  
 
     Spara det returnerade värdet i variabel och logga ut 
 
@@ -122,7 +97,7 @@ Uppdatera ett redan skapat event
 
 Input 
 
-    Skapa 3 events som i testfall 2  och spara de med setEvent 
+    Skapa 3 events som i testfall 2  och spara de med createEvent 
 
     GetEvents för att ta reda på id av det specifika eventet (new Event2), logga ut alla events 
 
@@ -134,27 +109,9 @@ Output
 
     Eventet uppdateras och visar ‘updated event 2’ 
 
- 
 
-Testfall 6 Get bara dates med events 
 
-Hämtar endast customDates med sparade event 
-
-Input 
-
-    Skapa 3+ Customdates och lägg till event, och ett CustomDate objekt utan event 
-
-    Anropa getFormattedDatesWithEvents 
-
-    Logga ut resultat 
-
-Output 
-
-    Endast customDates med events loggas ut 
-
- 
-
-Testfall 7 Sortera dates-arrayen 
+Testfall 6 Sortera dates-arrayen 
 
 Sortera alla sparade customDates i dates-arrayen i DateManager 
 
