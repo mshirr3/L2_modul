@@ -16,10 +16,10 @@ then create an instance of customDate:
 const date = new Date()
 dateManager.createCustomDate(date)
 ```
-you can now set events for this customDate like this:
+you can now create events for this customDate like this:
 ``` javascript
 const customDate = dateManager.getCustomDate(date)
-customDate.setEvent('New event')
+customDate.createEvent('New event')
 ```
 Use dateManager to basically save all your customDates with their events in one place
 

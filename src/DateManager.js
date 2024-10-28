@@ -11,10 +11,10 @@ export class DateManager {
         this.#dates = []
     }
 
-    createCustomDate (date) {
+    createCustomDate(date) {
         if (!(this.isDateSaved(date))) {
-           const customDate = new CustomDate(date)
-           this.#dates.push(customDate)
+            const customDate = new CustomDate(date)
+            this.#dates.push(customDate)
         } else {
             throw new Error('Custom date with this date already exists')
         }
@@ -28,7 +28,6 @@ export class DateManager {
                     return customDate
                 }
             }
-            throw new Error('No custom date for this date')
         }
     }
 
@@ -48,11 +47,28 @@ export class DateManager {
         return this.#dates
     }
 
+    getCustomDatesWithEvents() {
+        let customDatesWithEvents = []
+
+        for (const customDate of this.#dates) {
+            const events = customDate.getEvents()
+            if (events.length > 0) {
+                customDatesWithEvents.push(customDate)
+            }
+        }
+
+        if (customDatesWithEvents.length > 0) {
+            return customDatesWithEvents
+        } else {
+            throw new Error('No events registered')
+        }
+    }
+
     /**
      * Sorts dates from earliest to latest.
      *
      */
-    sortDates () {
+    sortDates() {
         const dates = this.getAllCustomDates()
         const dateSorter = new DateSorter(dates)
         dateSorter.sortDates()

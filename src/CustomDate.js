@@ -71,11 +71,7 @@ export class CustomDate {
     }
 
     getEvents() {
-        if (this.#events.length > 0) {
-            return this.#events
-        } else {
-            throw new Error('No events for this date found')
-        }
+        return this.#events
     }
 
     deleteEvent(id) {
@@ -95,19 +91,16 @@ export class CustomDate {
      * @returns {string} difference in days
      */
     differenceInDays(anotherDate) {
-        try {
-            this.isDate(anotherDate)
-            const currentDateTime = this.#date.getTime()
-            const otherDateTime = anotherDate.getTime()
+        this.isDate(anotherDate)
+        const currentDateTime = this.#date.getTime()
+        const otherDateTime = anotherDate.getTime()
 
-            const diffTime = Math.abs(otherDateTime - currentDateTime)
+        const diffTime = Math.abs(otherDateTime - currentDateTime)
 
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-            return `${diffDays} days`
-        } catch (error) {
-            return error.message
-        }
+        return `${diffDays} days`
+
     }
 
     getDate() {
@@ -120,15 +113,11 @@ export class CustomDate {
     }
 
     getLatestDateOfTwo(date2) {
-        try {
-            this.isDate(date2)
-            if (this.#date.getTime() < date2.getTime()) {
-                return date2
-            } else {
-                return this.#date
-            }
-        } catch (error) {
-            return error.message
+        this.isDate(date2)
+        if (this.#date.getTime() < date2.getTime()) {
+            return date2
+        } else {
+            return this.#date
         }
     }
 }

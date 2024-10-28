@@ -47,7 +47,6 @@ export class DateSorter {
         return date1 > date2
     }
 
-
     #swapDates (index) {
         const temp = this.#dates[index]
         this.#dates[index] = this.#dates[index + 1]
