@@ -63,6 +63,7 @@ export class DateManager {
     }
 
     #saveCustomDatesWithEvents() {
+        this.#customDatesWithEvents.length = 0
         for (const customDate of this.#customDates) {
             const events = customDate.getEvents()
             if (events.length > 0) {

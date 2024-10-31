@@ -54,11 +54,15 @@ export class CustomDate {
         return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
     }
 
+    #generateRandomId() {
+        return Math.random().toString(36).substring(2, 6)
+    }
+
     createEvent(event) {
         if (typeof event === 'string') {
             const theEvent = {}
             theEvent.eventText = event
-            theEvent.id = this.#events.length // if length = 0 then id = 0, which is also the corresponding index
+            theEvent.id = this.#generateRandomId()
             this.#events.push(theEvent)
         } else {
             throw new Error('Event argument must be a string')
@@ -75,9 +79,10 @@ export class CustomDate {
     }
 
     deleteEvent(id) {
-        // the id corresponds to index of event
-        const index = id
-        this.#events.splice(index, 1)
+        const index = this.#events.findIndex(event => event.id === id)
+        if (index !== -1) {
+            this.#events.splice(index, 1)
+        }
     }
 
     updateEvent(id, updatedEvent) {
