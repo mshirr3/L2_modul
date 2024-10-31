@@ -65,6 +65,15 @@ export class DateManager {
         }
     }
 
+    customDateWithEventsExist() {
+        this.#saveCustomDatesWithEvents()
+        if (this.#customDatesWithEvents.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     getCustomDatesWithEvents() {
         this.#saveCustomDatesWithEvents()
         if (this.#customDatesWithEvents.length > 0) {
