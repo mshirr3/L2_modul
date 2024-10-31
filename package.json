@@ -1,6 +1,6 @@
 {
   "name": "date-managing",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Modul för Laboration 2 i 1dv610.",
   "type": "module",
   "main": "index.js",
