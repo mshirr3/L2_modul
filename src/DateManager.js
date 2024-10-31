@@ -18,17 +18,23 @@ export class DateManager {
             const customDate = new CustomDate(date)
             this.#customDates.push(customDate)
         } else {
-            throw new Error('Custom date with this date already exists')
+            throw new Error('this date is already saved')
         }
     }
 
     getCustomDate(dateToGet) {
-        if (this.isDateSaved(dateToGet)) {
-            for (const customDate of this.#customDates) {
-                const savedDate = customDate.getDate()
-                if (this.#isSameDate(savedDate, dateToGet)) {
-                    return customDate
-                }
+        if (!this.isDateSaved(dateToGet)) {
+            throw new Error('This date does is not saved')
+        }
+        const customDate = this.#findCustomDate(dateToGet)
+        return customDate
+    }
+
+    #findCustomDate(dateToGet) {
+        for (const customDate of this.#customDates) {
+            const savedDate = customDate.getDate()
+            if (this.#isSameDate(savedDate, dateToGet)) {
+                return customDate
             }
         }
     }
@@ -45,7 +51,7 @@ export class DateManager {
     isDateSaved(dateToCheck) {
         for (const customDate of this.#customDates) {
             const savedDate = customDate.getDate()
-            if (!(customDate.isDate(dateToCheck)) && this.#isSameDate(savedDate, dateToCheck)) {
+            if (!(customDate.validateDate(dateToCheck)) && this.#isSameDate(savedDate, dateToCheck)) {
                 return true
             }
         }
@@ -75,7 +81,6 @@ export class DateManager {
     }
 
     getCustomDatesWithEvents() {
-        this.#saveCustomDatesWithEvents()
         if (this.#customDatesWithEvents.length > 0) {
             return this.#customDatesWithEvents
         } else {

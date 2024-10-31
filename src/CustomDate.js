@@ -8,12 +8,12 @@ export class CustomDate {
     #events
 
     constructor(date = new Date()) {
-        this.isDate(date)
+        this.validateDate(date)
         this.#date = date
         this.#events = []
     }
 
-    isDate(date) {
+    validateDate(date) {
         if (!(date instanceof Date)) {
             throw new Error('Input must be a date object (not CustomDate)')
         }
@@ -91,16 +91,24 @@ export class CustomDate {
      * @returns {string} difference in days
      */
     differenceInDays(anotherDate) {
-        this.isDate(anotherDate)
-        const currentDateTime = this.#date.getTime()
-        const otherDateTime = anotherDate.getTime()
+        this.validateDate(anotherDate)
 
-        const differenceInTime = Math.abs(otherDateTime - currentDateTime)
+        const currentDateTime = this.#getTimestamp(this.#date)
+        const otherDateTime = this.#getTimestamp(anotherDate)
 
-        const differenceIndays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24))
+        const differenceInDays = this.#calculateDayDifference(currentDateTime, otherDateTime)
 
-        return `${differenceIndays} days`
+        return `${differenceInDays} days`
 
+    }
+
+    #getTimestamp(date) {
+        return date.getTime()
+    }
+
+    #calculateDayDifference(time1, time2) {
+        const differenceInTime = Math.abs(time2 - time1)
+        return Math.ceil(differenceInTime / (1000 * 60 * 60 * 24))
     }
 
     getDate() {
@@ -113,7 +121,7 @@ export class CustomDate {
     }
 
     getLatestDateOfTwo(date2) {
-        this.isDate(date2)
+        this.validateDate(date2)
         if (this.#date.getTime() < date2.getTime()) {
             return date2
         } else {
