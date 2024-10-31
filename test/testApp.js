@@ -36,7 +36,7 @@ dateManager.createCustomDate(date6)
 const customDate6 = dateManager.getCustomDate(date6)
 
 const result6 = customDate5.differenceInDays(date6)
-// console.log(result6)
+//    console.log(result6)
 
 // Testfall 4 (SUCCESS)
 const result7 = customDate5.getLatestDateOfTwo(date6)
@@ -63,4 +63,3 @@ customDate3.updateEvent(1, updatedEvent)
 // for (let i = 0; i < allCustomDates.length; i++) {
 //     console.log(allCustomDates[i].getDate())
 // }
-

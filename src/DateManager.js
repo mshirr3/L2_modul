@@ -6,59 +6,69 @@ import { DateSorter } from './DateSorter.js'
  */
 
 export class DateManager {
-    #dates
+    #customDates
+    #customDatesWithEvents
     constructor() {
-        this.#dates = []
+        this.#customDates = []
+        this.#customDatesWithEvents = []
     }
 
     createCustomDate(date) {
         if (!(this.isDateSaved(date))) {
             const customDate = new CustomDate(date)
-            this.#dates.push(customDate)
+            this.#customDates.push(customDate)
         } else {
             throw new Error('Custom date with this date already exists')
         }
     }
 
-    getCustomDate(date) {
-        if (this.isDateSaved(date)) {
-            for (const customDate of this.#dates) {
+    getCustomDate(dateToGet) {
+        if (this.isDateSaved(dateToGet)) {
+            for (const customDate of this.#customDates) {
                 const savedDate = customDate.getDate()
-                if (savedDate.getTime() === date.getTime()) {
+                if (this.#isSameDate(savedDate, dateToGet)) {
                     return customDate
                 }
             }
         }
     }
 
+    #isSameDate(date1, date2) {
+        if (date1.getTime() === date2.getTime()) {
+            return true
+        } else {
+            false
+        }
+    }
+
     // Compares the two object by value not reference since reference is not relevant.
-    isDateSaved(date) {
-        for (const customDate of this.#dates) {
+    isDateSaved(dateToCheck) {
+        for (const customDate of this.#customDates) {
             const savedDate = customDate.getDate()
-            if (!(customDate.isDate(date)) && savedDate.getTime() === date.getTime()) {
+            if (!(customDate.isDate(dateToCheck)) && this.#isSameDate(savedDate, dateToCheck)) {
                 return true
             }
         }
         return false
     }
 
-
     getAllCustomDates() {
-        return this.#dates
+        return this.#customDates
+    }
+
+    #saveCustomDatesWithEvents() {
+        for (const customDate of this.#customDates) {
+            const events = customDate.getEvents()
+            if (events.length > 0) {
+                this.#customDatesWithEvents.push(customDate)
+            }
+        }
     }
 
     getCustomDatesWithEvents() {
-        let customDatesWithEvents = []
-
-        for (const customDate of this.#dates) {
-            const events = customDate.getEvents()
-            if (events.length > 0) {
-                customDatesWithEvents.push(customDate)
-            }
-        }
-
-        if (customDatesWithEvents.length > 0) {
-            return customDatesWithEvents
+        this.#saveCustomDatesWithEvents()
+        if (this.#customDatesWithEvents.length > 0) {
+            return this.#customDatesWithEvents
         } else {
             throw new Error('No events registered')
         }

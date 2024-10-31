@@ -95,11 +95,11 @@ export class CustomDate {
         const currentDateTime = this.#date.getTime()
         const otherDateTime = anotherDate.getTime()
 
-        const diffTime = Math.abs(otherDateTime - currentDateTime)
+        const differenceInTime = Math.abs(otherDateTime - currentDateTime)
 
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+        const differenceIndays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24))
 
-        return `${diffDays} days`
+        return `${differenceIndays} days`
 
     }
 
